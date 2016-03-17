@@ -1,0 +1,1072 @@
+@import 'bourbon';
+@import 'partials/reset';
+@import 'partials/plugins';
+@import 'partials/mixins';
+@import 'partials/extends';
+@import 'partials/remify';
+@import 'partials/functions';
+@import 'partials/animate';
+@import 'plugins/font-awesome/font-awesome';
+
+/* MEDIA QUERIES */
+$breakpoint-mobile-landscape:	640px;
+$breakpoint-tablet:				768px;
+$breakpoint-desktop:			1200px;
+$breakpoint-desktop-wide:		1260px;
+$apple-wide:					1920px;
+
+/* COLOURS */
+$darkBase:						#222222;	//title color
+$baseColor:						#696969;	//default body text color
+$highlight:						#16d57d;	//highlight green
+
+/* FONTS */
+$titleFont:						'Georgia', serif;
+$baseFont:						'Arial', sans-serif;
+$baseFontWeight:				400;
+$baseFontWeightBold:			700;
+$baseFontSize:					16px;
+
+/* SPACING & MISC */
+$transition:					all .35s ease-in-out;
+
+
+/* GLOBALS */
+* { @include box-sizing(border-box); }
+html,
+body{
+	width:100%;
+	height:100%;
+}
+body { 
+	font:400 rem(18px) $baseFont;
+	line-height:1.9;
+	color:$baseColor;
+	overflow-x:hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.container { 
+	@extend .clearfix; 
+	width:100%; 
+	max-width:remify(2000px);
+	margin:0;
+}
+.clearfix {
+	&:before, 
+	&:after { 
+		content:" "; 
+		display:block; 
+	}
+  	&:after { 
+  		clear:both; 
+  	}
+}
+ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+::selection {
+    color:#fff; 
+    background:$highlight;
+}
+
+/* GLOBAL FONTS */
+h1, h2, h3, h4, h5, h6 {
+	font-family:$titleFont;
+	color:$darkBase;
+	font-weight:400;
+	margin:0;
+	a:hover {
+		color:$highlight;
+	}
+}
+h1 { 
+	line-height:1;
+	@include fontSize(75px);
+	@include mq(tablet) {
+		@include fontSize(125px);
+	}
+}
+h2,
+h2 a {
+	font-family:$titleFont;
+	color:$darkBase;
+	@include rem('margin', 0 0 20px 0);
+	@include fontSize(35px);
+	@include mq(tablet-landscape) {
+		@include fontSize(48px);
+	}
+}
+h3 {
+	@include rem('margin', 0 0 20px 0);
+	@include fontSize(28px);
+	@include mq(tablet-landscape) {
+		@include fontSize(38px);
+	}
+}
+h5 { 
+	@include rem('margin', 0 0 20px 0);
+	@include fontSize(26px);
+	@include mq(tablet-landscape) {
+		@include fontSize(30px);
+	}
+} 
+h6 {
+	font-family:$baseFont;
+	@include rem('margin', 0 0 5px 0);
+	@include fontSize(24px);
+}
+p {
+	@include rem('margin', 0 0 30px 0);
+	&.btn-holder {
+		margin:0;
+	}
+	&.intro {
+		@include fontSize(28px);
+	}
+}
+a { 
+	text-decoration:none; 
+	font-family:$baseFont;
+	color:$highlight;
+	@include transition($transition);
+	&.excerpt-read-more { 
+		display:none; 
+	}
+}
+a img { vertical-align:bottom; }
+.btn { 
+	text-align:center; 
+	color:$darkBase;
+	background:transparent;
+	display:inline-block;
+	font-weight:700;
+	border:3px solid $highlight;
+	position:relative;
+	@include rem('padding', 10px 20px);
+	&:before {
+		content:'';
+		background:$highlight;
+		width:100%;
+		height:0;
+		position:absolute;
+		left:0;
+		bottom:0;
+		z-index:-1;
+		@include transition(.35s);
+	}
+	&:hover:before {
+		height:100%;
+	}
+}
+.shout {
+	color:$darkBase;
+	position:relative;
+	font-family:$titleFont;
+	line-height:remify(49px);
+	@include fontSize(25px);
+	@include mq(tablet) {
+		line-height:remify(72px);
+		@include fontSize(48px);
+	}//end tablet
+}
+.quote {
+	@extend .shout;
+	color:#b0b0b0;
+	font-family:$baseFont;
+	span {
+		line-height:1;
+		@include fontSize(18px);
+	}
+	@include mq(tablet) {
+		line-height:remify(56px);
+		@include fontSize(40px);
+	}
+}//quote
+
+/* GLOBAL IMAGE STYLING */
+img {
+	width:auto;
+	height:auto;
+	max-width:100%;
+	&.img-block {
+		@include rem('margin', 0 0 30px 0);
+	}
+	&.img-max {
+		width:100%;
+	}
+}
+figure { 
+	margin:0;
+	position:relative; 
+}
+figcaption { 
+	font-family:$titleFont;
+	font-style:italic;
+	text-align:right;
+	@include fontSize(12px); 
+}
+
+/* GENERIC MISC */
+iframe { 
+	width:100%;
+}
+#big-circle {
+	display: block; 
+	width:remify(250px);
+	height:remify(250px); 
+	border-radius:remify(250px); 
+	background:$highlight;
+	position: absolute; 
+	top: 5%; 
+	left:-25%;
+	z-index: -1;
+	@include mq(tablet) {
+		left:-15%;
+	}
+	@include mq(tablet-landscape) {
+		width:remify(324px);
+		height:remify(324px);
+		left:-10%;
+	}
+}
+
+/* WRAPPERS */
+.main-wrapper {
+	@include mq(desktop) {
+		height:100%;
+	}
+}
+.body-wrapper {
+	@include mq(desktop) {
+		height:100%;
+		margin-left:12.25%;
+	}
+}
+
+/* COLUMN LAYOUT */
+section {}
+main { position:relative; }
+.row { 
+	@extend .clearfix; 
+}
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.one-third-left,
+.one-third-right,
+.two-thirds-left,
+.two-thirds-right {
+	display:block;
+	width:100%;
+	@include rem('padding', 0 20px);
+}
+.col-1 {
+	@include mq(tablet-landscape) {
+		@include rem('padding', 0 30px);
+	}
+}
+.col-2 {
+	@include mq(tablet-landscape) {
+		width:50%;
+		float:left;
+		@include rem('padding', 0 30px);
+	}
+}
+.col-3 {
+	@include mq(tablet) {
+		width:33.33%;
+		float:left;
+		@include rem('padding', 0 30px);
+	}
+}
+.col-4 {
+	@include mq(tablet-landscape) {
+		width:25%;
+		float:left;
+		@include rem('padding', 0 30px);
+	}
+}
+.one-third-left {
+	@extend .clearfix;
+	@include mq(tablet-landscape) {
+		width:30%;
+		float:left;
+		@include rem('padding', 0 30px);
+	}
+}
+.one-third-right {
+	@include mq(tablet-landscape) {
+		width:30%;
+		float:right;
+		@include rem('padding', 0 30px);
+	}
+}
+.two-thirds-left {
+	@include mq(tablet-landscape) {
+		width:70%;
+		float:left;
+		@include rem('padding', 0 30px);
+	}
+}
+.two-thirds-right {
+	@include mq(tablet-landscape) {
+		width:70%;
+		float:right;
+		@include rem('padding', 0 30px);
+	}
+}
+
+/* LEFT SIDEBAR */
+.left-sidebar {
+	display:block;
+	position:relative;
+	padding:remify(20px);
+	z-index:12;
+	border-bottom:1px solid #f4f4f4;
+	@extend .clearfix;
+	@include mq(tablet-landscape) {
+		padding:remify(30px);
+	}//end tablet-landscape
+	@include mq(desktop) {
+		position:fixed;
+		top:0;
+		left:0;
+		bottom:0;
+		width:12.25%;
+		border-right:1px solid #f4f4f4;
+		padding:remify(150px 30px 30px);
+	}//end desktop
+}//left-sidebar
+
+/* NAV ICON */
+#nav-icon {
+	display:block;
+	width:remify(30px);
+	z-index:12;
+	float:right;
+	@extend .clearfix;
+	span {
+		display:block;
+		background:$darkBase;
+		height:remify(2px);
+		width:100%;
+		margin-bottom:remify(5px);
+		float:right;
+		position:relative;
+		@include transition($transition);
+		&:nth-child(2) {
+			max-width:remify(20px);
+		}
+		&:nth-child(3) {
+			max-width:remify(25px);
+			margin-bottom:0;
+		}
+	}//span
+	&:hover {
+		cursor:pointer;
+		span {
+			max-width:100%;
+		}
+	}//hover
+	&.open {
+		margin-bottom:remify(20px);
+		span {
+			max-width:100%;
+			&:nth-child(1) {
+				top:remify(7px);
+				@include transform(rotate(45deg));
+			}
+			&:nth-child(2) {
+				opacity:0;
+			}
+			&:nth-child(3) {
+				top:remify(-7px);
+				@include transform(rotate(-45deg));
+			}
+		}
+	}//open nav
+}//nav-icon
+
+/* MAIN NAVIGATION */
+.nav-wrapper {
+	display:none;
+	clear:both;
+	nav {
+		display:block;
+		width:100%;
+		background:#fff;
+		z-index:9;
+		clear:both;
+		ul {
+			display:block;
+			padding:0;
+			margin:0;
+			width:100%;
+			li {
+				display:block;
+				padding:0;
+				margin:0;
+				&.social {
+					display:inline-block;
+					margin-top:remify(20px);
+					a {
+						font-family:'FontAwesome';
+						padding:remify(10px 20px 10px 0);
+						@include fontSize(26px);
+						&:hover {
+							background:none;
+							color:$highlight;
+						}
+					}
+				}//social
+				a {
+					display:block;
+					color:$baseColor;
+					font-family:$titleFont;
+					padding:remify(10px 0);
+					@include fontSize(26px);
+					&:hover {
+						color:$highlight;
+					}
+				}//a
+			}//li
+		}//ul
+	}//nav
+	@include mq(tablet-landscape) {
+		ul.social-links {
+			float:left;
+			margin-top:remify(20px);
+			li:first-child {
+				margin-left:0;
+			}
+		}
+	}//end tablet-landscape
+	@include mq(desktop) {
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		height:100%;
+		background:#fff;
+		padding:remify(0 30px 30px);
+		z-index:-1;
+		nav {
+			margin-top:remify(110px);
+			margin-left:12.25%;
+			ul li a { @include fontSize(48px); }
+		}//nav
+		ul.social-links {
+			margin-top:remify(40px);
+			margin-left:12.25%;
+			li {
+				margin-left:remify(40px);
+				a {
+					@include fontSize(48px);
+				}
+			}
+		}//social-links
+	}//end desktop
+}//nav-wrapper
+
+/* GLOBAL SOCIAL LINKS */
+.social-links {
+	display:table;
+	margin-top:remify(40px);
+	li {
+		display:table-cell;
+		width:25%;
+		a {
+			font-family:'FontAwesome';
+			color:$darkBase;
+			@include fontSize(26px);
+			&:hover {
+				background:none;
+				color:$highlight;
+			}
+		}
+	}//li
+	@include mq(tablet-landscape) {
+		display:block;
+		margin-top:0;
+		float:right;
+		li {
+			display:inline-block;
+			width:auto;
+			margin-left:remify(20px);
+		}
+	}//end tablet-landscape
+}//social-links
+
+/* HOMPAGE MAIN SLIDE */
+.homepage-main-slide {
+	position:relative;
+	.logo {
+		position:relative;
+		padding:remify(80px 0);
+		h4 { 
+			color:#5a5a5a;
+		}
+	}//logo
+	#particles-js {
+		display:none;
+		position:absolute;
+		bottom:remify(50px);
+		width:50%;
+		height:100vh;
+	}
+	@include mq(tablet) {
+		.logo {
+			padding:remify(150px 0);
+		}
+	}//end tablet
+	@include mq(desktop) {
+		width:100%;
+		height:100%;
+		margin-bottom:remify(100px);
+		.container,
+		.col-1 {
+			position:relative;
+			height:100%;
+		}
+		.logo {
+			padding:0;
+			position:absolute;
+			bottom:remify(50px);
+			background:#fff;
+			.logo-text {
+				position:relative;
+				z-index:10;
+			}
+			#triangle {
+				display:block;
+				width:remify(295px);
+				height:remify(254px);
+				position:absolute;
+				top:-12%;
+				right:38%;
+				background:url(../images/logo-triangle.png) no-repeat;
+			}
+		}
+		#particles-js {
+			display:block;
+		}
+	}//end desktop
+}//homepage-main-slide
+
+/* CONTENT */
+#content {
+	@include mq(desktop) {
+		#about-me,
+		.recent-projects-holder {
+			margin:remify(100px 0);
+		}
+	}
+}
+
+/* RECENT PROJECT LIST */
+.recent-projects-holder {
+	margin:remify(40px 0);
+}
+.recent-projects {
+	display:block;
+	padding:0;
+	li {
+		display:block;
+		border-top:1px solid #f4f4f4;
+		a {
+			display:block;
+			padding:remify(20px 0);
+			font-weight:400;
+			color:$baseColor;
+			position:relative;
+			.tags {
+				display:block;
+				font-weight:400;
+				color:lighten($baseColor, 10%);
+				@include fontSize(14px);
+				@include transition($transition);
+			}
+			&:before {
+				content:'';
+				background:$highlight;
+				position:absolute;
+				top:0;
+				left: calc(-50vw + 50%);
+				margin-left:-12.25%;
+				width:0;
+				height:100%;
+				z-index:-1;
+				@include transition(.8s);
+			}
+			&:hover {
+				color:$highlight;
+				.tags { 
+					color:$highlight;
+				}
+			}//hover
+		}//a
+	}//li
+	@include mq(tablet-landscape) {
+		li a {
+			display:table;
+			width:100%;
+			@include fontSize(26px);
+			.tags {
+				text-align:right;
+				display:table-cell;
+				vertical-align:middle;
+			}
+			&:hover {
+				color:$darkBase;
+				.tags {
+					color:$darkBase;
+				}
+				&:before {
+					width:100vw;
+					padding-right:16.25%;
+				}
+			}//hover
+		}//li a
+	}//end tablet-landscape
+}//recent-projects
+
+/* FOOTER */
+footer {
+	display:block;
+	padding:remify(20px 0);
+	border-top:1px solid #f4f4f4;
+	@include fontSize(12px);
+	#copyright {
+		margin:0;
+	}
+}//footer
+
+/*========================================================================
+/* GLOBAL POST SETTINGS 
+This section contains the styling for all archive pages. It's global so change one thing,
+it changes them all. 
+*/
+
+/* Archive Header 
+The header will be displayed with a solid colour background, making the text appear white.
+This header is being used on the journal archive page.
+*/
+.archive-header {
+	display:block;
+	position:relative;
+	padding:remify(30px 0);
+	margin:remify(0 0 30px 0);
+	&:before {
+		content:'';
+		display:block;
+		background:$highlight;
+		width:100vw;
+		height:100%;
+		position:absolute;
+		top:0;
+		left:calc(-50vw + 50%);
+		z-index:-1;
+	}
+	h1 {
+		line-height:remify(64px);
+		margin-bottom:remify(30px);
+		@include fontSize(48px);
+	}
+	.shout p {
+		margin-bottom:0;
+	}
+	@include mq(tablet) {
+		padding:remify(60px 0);
+		h1 {
+			line-height:1;
+			@include fontSize(75px);
+		}
+	}//end tablet
+	@include mq(desktop) {
+		margin-bottom:remify(60px);
+		&:before {
+			display:block;
+			margin-left:-12.25%;
+			padding-right:16.25%;
+		}
+		h1 {
+			@include fontSize(125px);
+		}
+	}//end desktop
+}//archive-header
+
+.case-study-header {
+	display:block;
+	position:relative;
+	padding:remify(30px 0);
+	margin-bottom:remify(30px);
+	header {
+		display:block;
+		position:relative;
+		h1 {
+			line-height:remify(64px);
+			margin-bottom:remify(20px);
+			@include fontSize(48px);
+		}
+	}//header
+	@include mq(tablet) {
+		padding:remify(60px 0);
+		header h1 {
+			line-height:1;
+			@include fontSize(75px);
+		}
+	}//end tablet
+	@include mq(desktop) {
+		height:100vh;
+		margin-bottom:remify(60px);
+		display:table;
+		.col-1 {
+			display:table-cell;
+			vertical-align:bottom;
+		}
+		header h1 {
+			@include fontSize(125px); 
+		}//header
+	}//end desktop
+}//case-study-header
+
+.case-study-sidebar {
+	display:block;
+	margin:remify(40px 0);
+	@extend .clearfix;
+	@include mq(tablet-landscape) {
+		margin-top:remify(15px);
+	}
+}
+
+/* Taxonomy Description
+This is the archive description and is only being display on the journal archive page.
+It appears underneath the header, within the coloured background.
+*/
+.taxonomy-description {
+	display:block;
+	@include mq(desktop) {
+		p { color:#fff; }
+	}
+}//taxonomy-description
+
+/* Details 
+This section is for the left column for individual case study pages.
+You know, the section that states, Client, Role and Agency.
+*/
+.details {
+	display:block;
+	padding:remify(20px 0);
+	border-top:1px solid #f4f4f4;
+	&:first-child {
+		border-top:0
+	}
+	@include mq(tablet) {
+		float:left;
+		width:33.33%;
+		padding:0;
+		margin:remify(0 0 30px 0);
+		border-top:0;
+		text-align:center;
+		&:first-child {
+			border-top:0;
+		}
+		&.last {
+			width:100%;
+		}
+	}//end tablet
+	@include mq(tablet-landscape) {
+		float:none;
+		display:block;
+		width:auto;
+		text-align:left;
+	}//end tablet-landscape
+}//details
+
+/* Archive Styling 
+This is how each post on the archive pages will look like.
+The most recent post appears on the homepage too.
+*/
+
+/* Entry meta data */
+.entry-meta {
+	line-height:1;
+	color:lighten($darkBase, 10%);
+	margin:0;
+	@include fontSize(12px);
+	.filed-under a {
+		color:$highlight;
+		font-weight:700;
+	}
+	.tags {
+		display:block;
+		a { 
+			font-weight:700;
+			color:$highlight; 
+		}
+	}
+}//entry-meta
+
+/* Global archive styling
+Although this is mainly used for the most recent post
+to show on the homepage, these styles are global.
+ */
+.post {
+	display:block;
+	margin:remify(0 0 40px 0);
+	@extend .clearfix;
+	.article-header {
+		display:block;
+		h2,
+		h5 {
+			display:block;
+			line-height:1.5;
+			a {
+				font-family:$titleFont;
+				position:relative;
+				&:before {
+					content:'';
+					height:1px;
+					background:$highlight;
+					width:0;
+					position:absolute;
+					left:0;
+					bottom:0;
+					@include transition(.75s);
+				}
+			}
+		}//h2
+	}//article-header
+	.intro {
+		@include fontSize(18px);
+	}
+	.blog-img {
+		display:none;
+		img {
+			display:block;
+		}
+	}//blog-img
+	@include mq(tablet) {
+		.intro { @include fontSize(28px); }
+	}
+	@include mq(tablet-landscape) {
+		display:table;
+		table-layout: fixed; //IE & Firefox fix
+		width:100%;
+		.article-header h2,
+		.article-header h5 {
+			a {
+				padding-bottom:remify(10px);
+				&:hover:before {
+					width:100%;
+				}
+			}
+		}
+		.article-left,
+		.blog-img {
+			display:table-cell;
+			vertical-align:middle;
+			width:50%;
+			position:relative;
+			img {
+				position:relative;
+				display:block;
+				right:-2vw;
+			}
+		}
+		.article-left {
+			padding-right:remify(30px);
+		}
+	}//end tablet-landscape
+}//article
+
+/*Journal Archive Page
+This is the for the style of the journal archive page. Takes most styling from above
+but modified for category pages.
+ */
+.category .post {
+	display:block;
+	.entry-content {
+		display:block;
+		@extend .clearfix;
+		.archive-img-thumbnail {
+			display:block;
+			height:350px;
+			background-position:center center;
+			background-size:cover;
+			margin-bottom:remify(20px);
+		}
+	}//entry-content
+	@include mq(tablet-landscape) {
+		display:block;
+		.entry-content {
+			display:table;
+			.archive-img-thumbnail,
+			.section-right {
+				display:table-cell;
+				vertical-align:middle;
+				width:60%;
+				padding-left:remify(30px);
+			}
+			.archive-img-thumbnail {
+				height:auto;
+				width:40%;
+			}
+		}//entry-content
+	}//end tablet-landscape
+}//archive-page
+
+/* Category list for single post page */
+.category-list {
+	display:block;
+	margin-bottom:remify(40px);
+	@extend .clearfix;
+	ul li {
+		display:block;
+		padding-top:remify(10px);
+		border-top:1px solid #f4f4f4;
+		margin-top:remify(10px);
+		&:before {
+			content:'\f054';
+			font-family:FontAwesome;
+			display:inline-block;
+			margin-right:10px;
+			font-weight:400;
+		}
+		a {
+			color:$darkBase;
+			span {
+				display:block;
+				color:$baseColor;
+				@include transition(.35s);
+			}
+			&:hover,
+			&:hover span {
+				color:$highlight;
+			}
+		}
+	}
+}//category-list
+
+/* Category list for category page */
+.category .category-list {
+	ul {
+		@extend .clearfix;
+		li {
+			padding:remify(20px);
+			margin:0;
+			border-top:0;
+			border-bottom:1px solid #f4f4f4;
+			&:before { 
+				display:none;
+			}
+		}//li
+	}//ul
+	@include mq(tablet-landscape) {
+		ul li {
+			float:left;
+			width:33.33%;
+			border-bottom:0;
+			padding:remify(0 30px);
+			a {
+				@include fontSize(26px);
+			}
+		}
+	}//end tablet-landscape
+	@include mq(desktop) {
+		margin-bottom:remify(60px);
+	}//end desktop
+}//category .category-list
+
+/* Social Sidebar */
+.twitter-feed {
+	display:block;
+	margin-bottom:remify(30px);
+	@extend .clearfix;
+	.aptf-tweets-wrapper {
+		display:block;
+		@extend .clearfix;
+		.aptf-single-tweet-wrapper {
+			display:block;
+			padding:remify(20px);
+			border-top:1px solid #f4f4f4;
+			&:first-child {
+				border-top:0;
+			}
+			.aptf-tweet-date {
+				margin-top:remify(12px);
+				@include fontSize(14px);
+				.aptf-timestamp a { 
+					color:$baseColor; 
+				}
+			}
+		}//aptf-single-tweet-wrapper
+	}//aptf-tweets-wrapper
+	@include mq(tablet-landscape) {
+		.aptf-tweets-wrapper .aptf-single-tweet-wrapper {
+			width:33.33%;
+			padding:remify(0 30px);
+			border-top:0;
+			clear:none;
+		}
+	}//end tablet-landscape
+	@include mq(desktop) {
+		margin:remify(60px 0 40px 0);
+	}//end desktop
+}//twitter-feed
+
+/* Individual Journal Posts */
+.single-format-standard .container {
+	max-width:remify(1200px);
+	margin:0 auto;
+}
+.single-journal-post-page {
+	display:block;
+	position:relative;
+	padding:remify(30px 0);
+	h1 {
+		line-height:remify(64px);
+		@include fontSize(48px);
+	}
+	@include mq(tablet) {
+		padding:remify(60px 0);
+		.col-1 {
+			display:table;
+			table-layout:fixed;
+			width:100%;
+		}
+		.header-left,
+		.header-right {
+			display:table-cell;
+			vertical-align:middle;
+			width:50%;
+			position:relative;
+		}
+		.header-left {
+			padding-right:remify(30px);
+			.entry-meta {
+				margin:remify(20px 0);
+			}
+		}
+		h1 {
+			line-height:1;
+			@include fontSize(75px);
+		}
+	}//end tablet
+	@include mq(desktop) {
+		h1 {
+			@include fontSize(125px);
+		}
+	}//end desktop
+}//single-journal-post-page
+.single-article-featured-img {
+	display:block;
+	margin-top:remify(30px);
+	img {
+		display:block;
+	}
+}//single-article-featured-img

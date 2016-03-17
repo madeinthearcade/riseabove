@@ -1,0 +1,8 @@
+@function em ($pixel, $baseFont: $baseFontSize) {
+	@return $pixel/$baseFont +em
+}
+@function calculateRem($size) {
+	$remSize: $size / 16px;
+	@return #{$remSize}rem;
+}
+

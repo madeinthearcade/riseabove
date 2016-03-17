@@ -1,0 +1,104 @@
+@mixin fontAll($fontSize, $lineHeight, $fontFamily) {
+	$lineHeight:$lineHeight/$fontSize; 
+	font:$fontSize/$baseFontSize + em/$lineHeight + em $fontFamily;
+}
+
+@mixin font($fontSize, $lineHeight) {
+	$lineHeight:$lineHeight/$fontSize; 
+	font-size:$fontSize/$baseFontSize + em;
+	line-height:$lineHeight + em;
+}
+@mixin fontSize($size) {
+	font-size: $size; //Fallback in px
+	font-size: calculateRem($size);
+}
+
+@mixin opacity($opacity) {
+	opacity:$opacity; $opacity-ie:$opacity * 100; filter:alpha(opacity=$opacity-ie);
+}
+
+@mixin twoColWidth {
+	width:(100 - $colGutter) / 2;
+}
+
+@mixin threeColWidth {
+	width:(100 - ($colGutter * 2)) / 3;
+}
+
+@mixin fourColWidth {
+	width:(100 - ($colGutter * 3)) / 4;
+}
+
+@mixin twoThirdsColWidth {
+	$colWidth:(100 - ($colGutter * 2)) / 3;
+	width:$colWidth * 2 + $colGutter;
+}
+
+@mixin transition ($transition) {
+	transition: $transition;
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+}
+
+@mixin box-sizing ($box-sizing) {
+	box-sizing:$box-sizing;
+	-webkit-box-sizing:$box-sizing;
+	-moz-box-sizing:$box-sizing;
+}
+
+@mixin border-radius ($border-radius) {
+	border-radius:$border-radius;
+	-webkit-border-radius:$border-radius;
+	-moz-border-radius:$border-radius;
+}
+
+// Mixins
+// --------------------------
+
+@mixin fa-icon-rotate($degrees, $rotation) {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+	-webkit-transform: rotate($degrees);
+	-moz-transform: rotate($degrees);
+	-ms-transform: rotate($degrees);
+	-o-transform: rotate($degrees);
+	transform: rotate($degrees);
+}
+
+@mixin fa-icon-flip($horiz, $vert, $rotation) {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+	-webkit-transform: scale($horiz, $vert);
+	-moz-transform: scale($horiz, $vert);
+	-ms-transform: scale($horiz, $vert);
+	-o-transform: scale($horiz, $vert);
+	transform: scale($horiz, $vert);
+}
+
+//Media Queries
+// --------------------------
+@mixin mq($media) {
+	@if $media == mobile-landscape {
+		@media only screen and (min-width: $breakpoint-mobile-landscape) and (orientation:landscape) { @content; }
+	}
+	@else if $media == tablet {
+		@media only screen and (min-width: $breakpoint-tablet) { @content; }
+	}
+	@else if $media == tablet-landscape {
+		@media only screen and (min-width: $breakpoint-tablet) and (orientation:landscape) { @content; }
+	}
+	@else if $media == desktop {
+		@media screen and (min-width: $breakpoint-desktop) { @content; }
+	}
+	@else if $media == desktop-wide {
+		@media screen and (min-width: $breakpoint-desktop-wide) { @content; }
+	}
+	@else if $media == apple-wide {
+		@media screen and (min-width: $apple-wide) { @content; }
+	}
+}
+
+// Weird Breakpoint Mixin
+@mixin mq-between($min, $max) {
+	@media (min-width: $min) and (max-width: $max) {
+		@content;
+	}
+}
