@@ -794,7 +794,6 @@ The most recent post appears on the homepage too.
 
 /* Entry meta data */
 .entry-meta {
-	line-height:1;
 	color:lighten($darkBase, 10%);
 	margin:0;
 	@include fontSize(12px);
@@ -1032,6 +1031,9 @@ but modified for category pages.
 		line-height:remify(64px);
 		@include fontSize(48px);
 	}
+	.header-left {
+		margin-bottom:remify(30px);
+	}
 	@include mq(tablet) {
 		padding:remify(60px 0);
 		.col-1 {
@@ -1043,30 +1045,30 @@ but modified for category pages.
 		.header-right {
 			display:table-cell;
 			vertical-align:middle;
-			width:50%;
+			width:40%;
 			position:relative;
+			margin-bottom:0;
 		}
 		.header-left {
 			padding-right:remify(30px);
+			width:60%;
 			.entry-meta {
 				margin:remify(20px 0);
 			}
 		}
 		h1 {
-			line-height:1;
-			@include fontSize(75px);
+			line-height:normal;
+			@include fontSize(82px);
 		}
 	}//end tablet
-	@include mq(desktop) {
-		h1 {
-			@include fontSize(125px);
-		}
-	}//end desktop
 }//single-journal-post-page
 .single-article-featured-img {
 	display:block;
-	margin-top:remify(30px);
 	img {
 		display:block;
+	}
+	@include mq(tablet) {
+		border-radius:50%;
+		overflow:hidden;
 	}
 }//single-article-featured-img
