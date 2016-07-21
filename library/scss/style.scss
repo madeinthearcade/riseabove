@@ -123,9 +123,6 @@ p {
 	&.btn-holder {
 		margin:0;
 	}
-	&.intro {
-		@include fontSize(28px);
-	}
 }
 a { 
 	text-decoration:none; 
@@ -849,9 +846,6 @@ to show on the homepage, these styles are global.
 			display:block;
 		}
 	}//blog-img
-	@include mq(tablet) {
-		.intro { @include fontSize(28px); }
-	}
 	@include mq(tablet-landscape) {
 		display:table;
 		table-layout: fixed; //IE & Firefox fix
